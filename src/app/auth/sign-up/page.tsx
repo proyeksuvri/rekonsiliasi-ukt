@@ -30,7 +30,7 @@ export default function SignUpPage() {
     setMessage(""); setPending(true);
     try {
       const result = await authClient.emailOtp.sendVerificationOtp({ email, type: "email-verification" });
-      setMessage(result.error ? result.error.message : "Kode verifikasi telah dikirim ulang.");
+      setMessage(result.error ? (result.error.message || "Kode belum dapat dikirim ulang.") : "Kode verifikasi telah dikirim ulang.");
     } catch (error) { setMessage(error instanceof Error ? error.message : "Kode belum dapat dikirim ulang."); }
     finally { setPending(false); }
   }
